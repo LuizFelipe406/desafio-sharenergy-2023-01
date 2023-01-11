@@ -4,12 +4,16 @@ import "dotenv/config";
 import connectToDatabase from "./database/Connection";
 import { customerRouter, loginRouter  } from "./routers";
 import ErrorMiddleware from "./middlewares/ErrorMiddleware";
+import Seed from "./database/seed/seedUser";
 
 export default class App {
   public app: express.Express;
+  private seeder: Seed;
 
   constructor() {
     this.app = express();
+
+    this.seeder = new Seed();
 
     this.config();
 
@@ -37,6 +41,7 @@ export default class App {
 
   public start(PORT: string): void {
     connectToDatabase().then(() => {
+      this.seeder.execute();
       this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
     })
   }

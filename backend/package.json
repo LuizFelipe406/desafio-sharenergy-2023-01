@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "main": "./build/server",
   "scripts": {
-    "db:reset": "npx sequelize-cli db:create && npx sequelize-cli db:migrate",
     "build": "npx -y tsc",
-    "predev": "npm run build && npm run db:reset",
+    "predev": "npm run build",
     "dev": "nodemon --watch \"./src/**\" ./src/server.ts",
-    "prestart": "npm run build && npm run db:reset",
+    "prestart": "npm run build",
     "start": "node .",
     "test": "mocha -r ts-node/register ./src/tests/integration/**/*$NAME*.{test,spec}.ts -t 10000 --exit"
   },

@@ -30,8 +30,6 @@ services:
     environment:
       - PORT=3001
       - JWT_SECRET=jwt_secret
-      - DB_USER=root
-      - DB_PASS=123456
       - DB_HOST=db
       - DB_PORT=27017
     healthcheck:
@@ -44,12 +42,9 @@ services:
     platform: linux/x86_64
     ports:
       - 3002:27017
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: 123456
     restart: 'always'
     healthcheck:
-      test: echo 'db.runCommand({serverStatus:1}).ok' | mongo admin -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD --quiet | grep 1
+      test: echo 'db.runCommand({serverStatus:1}).ok'
       interval: 10s
       timeout: 10s
       retries: 3

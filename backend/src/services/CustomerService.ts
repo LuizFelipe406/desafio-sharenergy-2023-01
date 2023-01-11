@@ -20,6 +20,7 @@ export default class CustomerService {
   async create(body: ICustomer): Promise<ICustomer> {
     const { error } = customerSchema.validate(body);
     if (error) throw new CustomError(error.message, 400);
+    console.log('oi')
 
     const newCustomer = await this.customerODM.create(body);
     return newCustomer;

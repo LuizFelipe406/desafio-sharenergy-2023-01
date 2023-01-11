@@ -21,6 +21,10 @@ class UserODM {
   public async findByUsername(value: string): Promise<IUser | null> {
     return this.model.findOne({ username: value });
   }
+
+  public async create(value: IUser): Promise<void> {
+    this.model.create({ ...value });
+  }
 }
 
 export default UserODM;

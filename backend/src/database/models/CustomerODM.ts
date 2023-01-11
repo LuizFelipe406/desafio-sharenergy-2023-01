@@ -26,7 +26,7 @@ class CustomerODM {
   }
 
   public async create(value: ICustomer): Promise<ICustomer> {
-    return this.model.create({ value });
+    return this.model.create({ ...value });
   }
 }
 
