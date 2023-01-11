@@ -3,7 +3,7 @@ import chaiHttp from 'chai-http';
 import sinon from 'sinon';
 import { app } from '../../app';
 import User from '../../database/models/UserODM';
-import { user, invalidUser } from './mock/mockUser';
+import user from './mock/mockUser';
 
 chai.use(chaiHttp);
 
