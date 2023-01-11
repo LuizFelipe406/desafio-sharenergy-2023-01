@@ -15,8 +15,7 @@ describe('Testa a rota de Customer', function () {
     it('Faz uma requisição sem token e espera retornar erro', async function() {
       const response = await chai
       .request(app)
-      .get('/customer')
-      .send({});
+      .get('/customer');
 
     expect(response.status).to.be.equal(401);
     expect(response.body).to.be.deep.equal({ message: 'invalid token' });

@@ -2,7 +2,7 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import connectToDatabase from "./database/Connection";
-import { loginRouter  } from "./routers";
+import { customerRouter, loginRouter  } from "./routers";
 import ErrorMiddleware from "./middlewares/ErrorMiddleware";
 
 export default class App {
@@ -29,6 +29,8 @@ export default class App {
     this.app.get("/", (req, res) => res.json({ ok: true }));
 
     this.app.use("/login", loginRouter.router);
+
+    this.app.use("/customer", customerRouter.router);
 
     this.app.use(ErrorMiddleware.handle);
   }

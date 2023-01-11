@@ -1,6 +1,5 @@
 import jwt = require("jsonwebtoken");
 import User from "../domains/User";
-import { CustomErrorParams } from "../utils/CustomError";
 
 export type JwtPayload = {
   id?: string;
@@ -25,12 +24,12 @@ export default class JWT {
     return token;
   }
 
-  static validateToken(token: string): JwtPayload | CustomErrorParams {
+  static validateToken(token: string): JwtPayload | null {
     try {
       const payload = jwt.verify(token, this.secret) as JwtPayload;
       return payload;
     } catch (error) {
-      return { status: 401, message: "invalid token" };
+      return null;
     }
   }
 }
