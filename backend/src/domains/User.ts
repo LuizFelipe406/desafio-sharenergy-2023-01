@@ -5,8 +5,8 @@ export default class User {
   readonly username: string;
   readonly password: string;
 
-  constructor({ id, username, password }: IUser) {
-    this.id = id;
+  constructor({ _id, username, password }: IUser) {
+    this.id = _id;
     this.username = username;
     this.password = password;
   }

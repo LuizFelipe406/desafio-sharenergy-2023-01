@@ -1,8 +1,8 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import sinon from 'sinon';
+import { Model } from 'mongoose';
 import { app } from '../../app';
-import User from '../../database/models/UserODM';
 import user from './mock/mockUser';
 
 chai.use(chaiHttp);
@@ -23,7 +23,7 @@ describe('Testa a Rota de Login', function () {
   });
 
   it('Faz uma requisição com username invalido e espera retornar erro', async function() {
-    sinon.stub(User, 'findOne').resolves(null);
+    sinon.stub(Model, 'findOne').resolves(null);
   
     const response = await chai
       .request(app)
@@ -38,7 +38,7 @@ describe('Testa a Rota de Login', function () {
   });
 
   it('Faz uma requisição com password invalido e espera retornar erro', async function() {
-    sinon.stub(User, 'findOne').resolves(user);
+    sinon.stub(Model, 'findOne').resolves(user);
   
     const response = await chai
       .request(app)
@@ -53,7 +53,7 @@ describe('Testa a Rota de Login', function () {
   });
 
   it('Faz uma requisição com sucesso e espera receber um token', async function() {
-    sinon.stub(User, 'findOne').resolves(user);
+    sinon.stub(Model, 'findOne').resolves(user);
   
     const response = await chai
       .request(app)

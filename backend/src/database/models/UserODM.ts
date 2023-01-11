@@ -7,20 +7,19 @@ import {
 import IUser from '../../interfaces/IUser';
 
 class UserODM {
-  private schema: Schema; // Atributo para o "molde"
-  private model: Model<IUser>; // Atributo para criar coleção e fornecer acesso ao banco
+  private schema: Schema;
+  private model: Model<IUser>;
 
   constructor() {
     this.schema = new Schema<IUser>({
-      id: { type: String, required: false },
       username: { type: String, required: true },
-      password: { type: Number, required: true },
+      password: { type: String, required: true },
     });
-    this.model = models.User || model('User', this.schema); // Antes de criar o Schema, verificar se o schema já existe. Caso não exista, o schema será criado. 
+    this.model = models.User || model('User', this.schema);
   }
 
-  public async findByValue(value: string): Promise<IUser> {
-    return this.model.find({ value });
+  public async findByValue(value: string): Promise<IUser | null> {
+    return this.model.findOne({ value });
   }
 }
 

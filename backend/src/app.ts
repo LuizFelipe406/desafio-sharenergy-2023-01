@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import "dotenv/config";
+import connectToDatabase from "./database/Connection";
 
 export default class App {
   public app: express.Express;
@@ -27,7 +28,9 @@ export default class App {
   }
 
   public start(PORT: string): void {
-    this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+    connectToDatabase().then(() => {
+      this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
+    })
   }
 }
 
