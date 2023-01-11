@@ -20,5 +20,10 @@ export default class UserRouter {
     this.authMiddleware.validateToken,
     (req, res, next) => this.customerController.findAll(req, res, next)
     );
+
+    this.router.post("/",
+    this.authMiddleware.validateToken,
+    (req, res, next) => this.customerController.create(req, res, next)
+    );
   }
 }

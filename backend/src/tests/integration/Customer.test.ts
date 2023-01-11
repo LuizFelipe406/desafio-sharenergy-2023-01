@@ -60,7 +60,7 @@ describe('Testa a rota de Customer', function () {
       });
 
       expect(response.status).to.be.equal(400);
-      expect(response.body).to.be.deep.equal({ message: 'invalid email' });
+      expect(response.body).to.be.deep.equal({ message: '"email" must be a valid email' });
     });
 
     it('Faz uma requisição com phone inválido', async function() {
@@ -77,7 +77,7 @@ describe('Testa a rota de Customer', function () {
       });
 
       expect(response.status).to.be.equal(400);
-      expect(response.body).to.be.deep.equal({ message: 'invalid phone' });
+      expect(response.body).to.be.deep.equal({ message: '"phone" length must be at least 8 characters long' });
     });
 
     it('Faz uma requisição com cpf inválido', async function() {
@@ -94,7 +94,7 @@ describe('Testa a rota de Customer', function () {
       });
 
       expect(response.status).to.be.equal(400);
-      expect(response.body).to.be.deep.equal({ message: 'invalid cpf' });
+      expect(response.body).to.be.deep.equal({ message: '"cpf" length must be at least 11 characters long' });
     });
 
     it('Faz uma requisição com sucesso e espera receber um novo cliente', async function() {

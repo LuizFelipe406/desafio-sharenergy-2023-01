@@ -17,4 +17,14 @@ export default class CustomerController {
       next(error);
     }
   }
+
+  async create(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { body } = req;
+      const newCustomer = await this.customerService.create(body);
+      res.status(201).json(newCustomer);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

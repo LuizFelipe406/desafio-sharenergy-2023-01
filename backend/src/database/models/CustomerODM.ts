@@ -24,6 +24,10 @@ class CustomerODM {
   public async findAll(): Promise<ICustomer[] | null> {
     return this.model.find();
   }
+
+  public async create(value: ICustomer): Promise<ICustomer> {
+    return this.model.create({ value });
+  }
 }
 
 export default CustomerODM;
