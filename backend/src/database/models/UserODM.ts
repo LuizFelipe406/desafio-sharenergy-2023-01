@@ -18,8 +18,8 @@ class UserODM {
     this.model = models.User || model('User', this.schema);
   }
 
-  public async findByValue(value: string): Promise<IUser | null> {
-    return this.model.findOne({ value });
+  public async findByUsername(value: string): Promise<IUser | null> {
+    return this.model.findOne({ username: value });
   }
 }
 

@@ -2,6 +2,8 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import connectToDatabase from "./database/Connection";
+import { loginRouter  } from "./routers";
+import ErrorMiddleware from "./middlewares/ErrorMiddleware";
 
 export default class App {
   public app: express.Express;
@@ -25,6 +27,10 @@ export default class App {
 
   private configRoutes(): void {
     this.app.get("/", (req, res) => res.json({ ok: true }));
+
+    this.app.use("/login", loginRouter.router);
+
+    this.app.use(ErrorMiddleware.handle);
   }
 
   public start(PORT: string): void {
