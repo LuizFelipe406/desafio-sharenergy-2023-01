@@ -1,4 +1,4 @@
-import IUser from "../Interfaces/IUser";
+import IUser from "../interfaces/IUser";
 
 export default class User {
   readonly id?: string;

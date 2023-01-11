@@ -1,4 +1,4 @@
-import User from "../../../Domains/User";
+import User from "../../../domains/User";
 
 const user = new User({
   id: '1',
