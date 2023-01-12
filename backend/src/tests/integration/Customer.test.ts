@@ -115,5 +115,89 @@ describe('Testa a rota de Customer', function () {
       expect(response.status).to.be.equal(201);
       expect(response.body).to.be.deep.equal(customer1);
     });
-  })
+  });
+
+  describe('Testa o método PATCH', function () {
+    it('Faz uma requisição sem token e espera retornar erro', async function() {
+      const response = await chai
+      .request(app)
+      .patch('/customer/1');
+
+      expect(response.status).to.be.equal(401);
+      expect(response.body).to.be.deep.equal({ message: 'invalid token' });
+    });
+
+    it('Faz uma requisição com email em formato inválido', async function() {
+      const response = await chai
+      .request(app)
+      .patch('/customer/1')
+      .set('authorization', token)
+      .send({
+        email: 'email invalido',
+      });
+
+      expect(response.status).to.be.equal(400);
+      expect(response.body).to.be.deep.equal({ message: '"email" must be a valid email' });
+    });
+
+    it('Faz uma requisição com phone inválido', async function() {
+      const response = await chai
+      .request(app)
+      .patch('/customer/1')
+      .set('authorization', token)
+      .send({
+        phone: '1',
+      });
+
+      expect(response.status).to.be.equal(400);
+      expect(response.body).to.be.deep.equal({ message: '"phone" length must be at least 8 characters long' });
+    });
+
+    it('Faz uma requisição com cpf inválido', async function() {
+      const response = await chai
+      .request(app)
+      .patch('/customer/1')
+      .set('authorization', token)
+      .send({
+        cpf: '999',
+      });
+
+      expect(response.status).to.be.equal(400);
+      expect(response.body).to.be.deep.equal({ message: '"cpf" length must be at least 11 characters long' });
+    });
+
+    it('Faz uma requisição com id de cliente invalido', async function() {
+      sinon.stub(Model, 'findByIdAndUpdate').resolves(null);
+
+      const response = await chai
+      .request(app)
+      .patch('/customer/9999')
+      .set('authorization', token)
+      .send({
+        email: 'customer1@email.com',
+        phone: '1234-5678',
+        cpf: '123.456.789-10'
+      });
+
+      expect(response.status).to.be.equal(404);
+      expect(response.body).to.be.deep.equal({ message: 'invalid customer id'});
+    });
+
+    it('Faz uma requisição com sucesso e espera receber o cliente atualizado', async function() {
+      sinon.stub(Model, 'findByIdAndUpdate').resolves(customer1);
+
+      const response = await chai
+      .request(app)
+      .patch('/customer/1')
+      .set('authorization', token)
+      .send({
+        email: 'customer1@email.com',
+        phone: '1234-5678',
+        cpf: '123.456.789-10'
+      });
+
+      expect(response.status).to.be.equal(200);
+      expect(response.body).to.be.deep.equal(customer1);
+    });
+  });
 })
