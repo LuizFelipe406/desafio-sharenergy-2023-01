@@ -202,4 +202,39 @@ describe('Testa a rota de Customer', function () {
       expect(response.body).to.be.deep.equal(customer1);
     });
   });
+
+  describe('Testa o método DELETE', function () {
+    it('Faz uma requisição sem token e espera retornar erro', async function() {
+      const response = await chai
+      .request(app)
+      .delete('/customer/1');
+
+      expect(response.status).to.be.equal(401);
+      expect(response.body).to.be.deep.equal({ message: 'invalid token' });
+    });
+
+    it('Faz uma requisição com id de cliente invalido', async function() {
+      sinon.stub(Model, 'findByIdAndUpdate').resolves(null);
+
+      const response = await chai
+      .request(app)
+      .delete('/customer/9999')
+      .set('authorization', token);
+
+      expect(response.status).to.be.equal(404);
+      expect(response.body).to.be.deep.equal({ message: 'invalid customer id'});
+    });
+
+    it('Faz uma requisição com sucesso e espera deletar um cliente', async function() {
+      sinon.stub(Model, 'findByIdAndDelete').resolves(null);
+
+      const response = await chai
+      .request(app)
+      .delete('/customer/1')
+      .set('authorization', token);
+
+      expect(response.status).to.be.equal(200);
+      expect(response.body).to.be.deep.equal({ message: 'ok' });
+    });
+  });
 })
