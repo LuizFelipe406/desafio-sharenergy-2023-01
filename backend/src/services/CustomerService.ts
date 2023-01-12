@@ -34,4 +34,9 @@ export default class CustomerService {
 
     return updatedCustomer;
   }
+
+  async delete(id: string): Promise<void> {
+    const deletedCustomer = await this.customerODM.delete(id);
+    if (!deletedCustomer) throw new CustomError('invalid customer id', 404);
+  }
 }

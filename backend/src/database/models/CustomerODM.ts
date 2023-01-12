@@ -32,6 +32,10 @@ class CustomerODM {
   public async update(id: string, value: Partial<ICustomer>): Promise<ICustomer | null> {
     return this.model.findByIdAndUpdate(id, { ...value });
   }
+
+  public async delete(id: string): Promise<ICustomer | null> {
+    return this.model.findByIdAndDelete(id);
+  }
 }
 
 export default CustomerODM;

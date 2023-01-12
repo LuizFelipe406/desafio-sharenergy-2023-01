@@ -37,4 +37,14 @@ export default class CustomerController {
       next(error);
     }
   }
+
+  async delete(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { params: { id } } = req;
+      await this.customerService.delete(id);
+      res.status(200).json({ message: 'ok' });
+    } catch (error) {
+      next(error);
+    }
+  }
 }

@@ -30,5 +30,10 @@ export default class UserRouter {
     this.authMiddleware.validateToken,
     (req, res, next) => this.customerController.update(req, res, next)
     );
+
+    this.router.delete("/:id",
+    this.authMiddleware.validateToken,
+    (req, res, next) => this.customerController.delete(req, res, next)
+    );
   }
 }

@@ -204,6 +204,7 @@ describe('Testa a rota de Customer', function () {
   });
 
   describe('Testa o método DELETE', function () {
+    afterEach(sinon.restore);
     it('Faz uma requisição sem token e espera retornar erro', async function() {
       const response = await chai
       .request(app)
@@ -214,7 +215,7 @@ describe('Testa a rota de Customer', function () {
     });
 
     it('Faz uma requisição com id de cliente invalido', async function() {
-      sinon.stub(Model, 'findByIdAndUpdate').resolves(null);
+      sinon.stub(Model, 'findByIdAndDelete').resolves(null);
 
       const response = await chai
       .request(app)
@@ -226,7 +227,7 @@ describe('Testa a rota de Customer', function () {
     });
 
     it('Faz uma requisição com sucesso e espera deletar um cliente', async function() {
-      sinon.stub(Model, 'findByIdAndDelete').resolves(null);
+      sinon.stub(Model, 'findByIdAndDelete').resolves(customer1);
 
       const response = await chai
       .request(app)
