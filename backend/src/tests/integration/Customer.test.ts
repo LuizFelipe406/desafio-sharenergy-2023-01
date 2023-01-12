@@ -118,6 +118,8 @@ describe('Testa a rota de Customer', function () {
   });
 
   describe('Testa o método PATCH', function () {
+    afterEach(sinon.restore);
+
     it('Faz uma requisição sem token e espera retornar erro', async function() {
       const response = await chai
       .request(app)

@@ -28,6 +28,10 @@ class CustomerODM {
   public async create(value: ICustomer): Promise<ICustomer> {
     return this.model.create({ ...value });
   }
+
+  public async update(id: string, value: Partial<ICustomer>): Promise<ICustomer | null> {
+    return this.model.findByIdAndUpdate(id, { ...value });
+  }
 }
 
 export default CustomerODM;
