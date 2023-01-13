@@ -65,7 +65,7 @@ function Login() {
 
   return (
     <div className="bg-cream w-screen h-screen main font-plexSans">
-      <div className="h-screen w-1/3 rounded-r-[2em] bg-gradient-to-b from-green to-dgreen shadow-2xl shadow-dgreen">
+      <div className="h-screen xl:w-1/3 lg:w-1/2 md:rounded-none md:w-screen lg:rounded-r-[2em] bg-gradient-to-b from-green to-dgreen shadow-2xl shadow-dgreen">
         <div className="flex flex-col items-center justify-center h-full w-2/3 m-auto">
           <div className="flex flex-col items-start w-full mb-14">
             <h1 className="text-5xl font-semibold text-cream mb-9">Bem-Vindo</h1>
