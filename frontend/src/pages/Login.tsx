@@ -60,7 +60,7 @@ function Login() {
   }
 
   return (
-    <div>
+    <div className="bg-blue">
       <input
         type="text"
         value={ username }
