@@ -7,11 +7,15 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        cream: '#EAE1D8',
-        'shadow-cream': '#C7C0B8',
+        cream: '#EBE7D9',
+        dcream: '#C7C0B8',
         green: '#618565',
-        'dark-green': '#80947D'
+        dgreen: '#4C694F',
+        golden: '#C5B688'
       },
+      fontFamily: {
+        plexSans: ['IBM Plex Sans', 'sans-serif']
+      }
     },
   },
   plugins: [],
