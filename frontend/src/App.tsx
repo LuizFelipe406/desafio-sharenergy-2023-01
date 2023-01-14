@@ -5,12 +5,10 @@ import RandomUsers from './pages/RandomUsers';
 
 function App() {
   return (
-    <div className="App">
-      <Routes>
-        <Route path="/" element={<Login />}/>
-        <Route path="/randomUsers" element={<RandomUsers />}/>
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<Login />}/>
+      <Route path="/randomUsers" element={<RandomUsers />}/>
+    </Routes>
   );
 }
 

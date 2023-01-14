@@ -5,7 +5,7 @@ function RandomUsers() {
   return (
     <div>
       <SideBar />
-      Lista de Clientes
+      <p>Lista de Clients</p>
     </div>
   )
 }
