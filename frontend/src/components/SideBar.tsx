@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 function SideBar() {
   return (
-    <div className="h-screen w-fit bg-gradient-to-b from-green to-dgreen shadow-2xl shadow-dgreen flex flex-col items-center font-plexSans font-semibold">
+    <div className="fixed left-0 h-screen w-fit bg-gradient-to-b from-green to-dgreen shadow-2xl shadow-dgreen flex flex-col items-center font-plexSans font-semibold">
       <h2 className="my-8 mx-5 text-golden">SHARENERGY</h2>
       <div className="w-full flex flex-col items-center h-full border-t border-dgreen">
         <h3 className="mt-16 text-cream">MENU</h3>
