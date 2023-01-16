@@ -8,7 +8,7 @@ type UserCardProps = {
 
 function UserCard({ user }: UserCardProps) {
   const {
-    picture: { thumbnail },
+    picture: { large },
     name: { first, last },
     email,
     login: { username },
@@ -16,13 +16,14 @@ function UserCard({ user }: UserCardProps) {
   } = user;
 
   return (
-    <div>
-      <img src={ thumbnail } alt="user image" />
+    <div className="flex">
+      <img className="rounded-full mr-10" src={ large } alt="user image" />
       <div>
-        <h3>{ `${first} ${last}` }</h3>
-        <span>{ username }</span>
-        <span>{ email }</span>
-        <span>{ age }</span>
+        <h3 className="my-5 text-green font-bold">{ `${first.toUpperCase()} ${last.toUpperCase()}, ${age}` }</h3>
+        <div className="border-t-2 border-gray-300 pt-3 font-medium">
+          <span className="mr-5 text-green ">{ username }</span>
+          <span>{ email }</span>
+        </div>
       </div>
     </div>
   )
@@ -31,7 +32,7 @@ function UserCard({ user }: UserCardProps) {
 UserCard.propTypes = {
   user: propTypes.shape({
     picture: propTypes.shape({
-      thumbnail: propTypes.string,
+      large: propTypes.string,
     }),
     name: propTypes.shape({
       first: propTypes.string,

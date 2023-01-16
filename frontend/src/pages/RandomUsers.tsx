@@ -96,7 +96,7 @@ function RandomUsers() {
   };
 
   return (
-    <div>
+    <div className="bg-cream w-screen h-screen font-plexSans">
       <SideBar />
       <div className="w-screen h-screen flex flex-col items-center justify-center">
         <div>

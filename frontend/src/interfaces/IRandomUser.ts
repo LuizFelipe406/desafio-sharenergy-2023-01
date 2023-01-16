@@ -11,6 +11,6 @@ export default interface IRandomUser {
     age: number,
   },
   picture: {
-    thumbnail: string,
+    large: string,
   }
 }
