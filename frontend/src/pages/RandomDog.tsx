@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { AiOutlineReload } from "react-icons/ai";
 import SideBar from "../components/SideBar";
 
 function RandomDog() {
@@ -21,15 +22,16 @@ function RandomDog() {
    }
 
   return (
-    <div>
+    <div className="bg-gradient-to-tr from-dcream to-cream font-plexSans">
       <SideBar />
-      <div className="h-screen w-screen flex items-center justify-center">
-        <img src={dogImg} alt="dog image" />
+      <div className="h-screen w-screen flex flex-col items-center justify-center">
+        <img src={dogImg} alt="dog image" className="rounded-3xl h-3/6 mb-16 shadow-xl"  />
         <button
+          className="bg-green px-3 py-2 rounded-lg shadow-md text-white text-2xl"
           type="button"
           onClick={ getNewDog }
         >
-          refresh
+          { <AiOutlineReload /> }
         </button>
       </div>
     </div>
