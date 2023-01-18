@@ -4,14 +4,14 @@ import { NavLink } from "react-router-dom";
 function SideBar() {
   return (
     <div
-      className="fixed top-0 lg:left-0 h-fit lg:h-screen w-screen lg:w-fit bg-gradient-to-b from-green to-dgreen shadow-md lg:shadow-2xl shadow-dgreen
+      className="fixed top-0 lg:left-0 h-20 lg:h-screen w-full lg:w-fit bg-gradient-to-b from-green to-dgreen shadow-md lg:shadow-2xl shadow-dgreen
       flex lg:flex-col items-center font-plexSans font-semibold
-      justify-between"
+      justify-between overflow-x-none"
     >
-      <h2 className="mx-4 md:mx-5 md:my-8 text-golden">SHARENERGY</h2>
-      <div className="flex lg:flex-col items-center justify-start sm:justify-between w-full lg:w-fit h-fit lg:h-full lg:border-t lg:border-dgreen">
-        <h3 className="lg:mt-16 text-cream hidden lg:visible">MENU</h3>
-        <nav className="flex lg:flex-col lg:items-start lg:justify-around h-1/4 lg:mt-8 text-cream">
+      <h2 className="mx-3 md:mx-5 md:my-8 text-golden">SHARENERGY</h2>
+      <div className="flex lg:flex-col items-center justify-start sm:justify-between md:justify-center w-full lg:w-fit h-fit lg:h-full lg:border-t lg:border-dgreen">
+        <h3 className="lg:mt-16 text-cream hidden lg:block">MENU</h3>
+        <nav className="flex lg:flex-col lg:items-start lg:justify-around h-1/4 lg:mt-8 md:mr-20 lg:mr-0 text-cream">
           <NavLink
             to="/randomUsers"
             className={({ isActive }) =>
@@ -53,7 +53,7 @@ function SideBar() {
             Clients
           </NavLink>
         </nav>
-        <div className="text-cream font-bold text-xs flex flex-col items-center lg:mt-96 mr-4 invisible sm:visible">
+        <div className="text-cream font-bold text-xs flex flex-col items-center lg:mt-96 lg:ml-4 mr-4 invisible sm:visible">
           <h3>LUIZ FELIPE PEREIRA</h3>
           <span>Dev FullStack Junior</span>
         </div>

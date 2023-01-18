@@ -97,7 +97,7 @@ function RandomUsers() {
   };
 
   return (
-    <div className="bg-gradient-to-tr from-dcream to-cream w-screen h-screen font-plexSans">
+    <div className="bg-gradient-to-tr from-dcream to-cream w-full h-screen font-plexSans">
       <SideBar />
       <div className="w-screen h-screen flex flex-col items-center justify-center">
         <div className="flex flex-col items-center justify-center md:mt-16">
