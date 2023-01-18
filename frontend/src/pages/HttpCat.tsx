@@ -41,7 +41,7 @@ function HttpCat () {
             {<BsSearch />}
           </button>
         </div>
-        <img src={catImage} alt="cat image" className={`rounded-3xl h-3/6 mt-16 shadow-xl ${catImage.length === 0 ? 'invisible' : ''}`} />
+        <img src={catImage} alt="cat image" className={`rounded-3xl h-2/6 mt-16 shadow-xl ${catImage.length === 0 ? 'invisible' : ''}`} />
       </div>
     </div>
   )
