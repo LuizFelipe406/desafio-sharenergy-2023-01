@@ -3,6 +3,8 @@ import SideBar from "../components/SideBar";
 import useLocalStorage from "../hooks/useLocalStorage";
 import IClient from "../interfaces/IClient";
 import requestApi from "../utils/requestApi";
+import clientSchema from "../utils/clientSchema";
+import { cpfMask, phoneMask } from "../utils/mask";
 
 function Clients() {
   const [update, setUpdate] = useState({
@@ -11,11 +13,14 @@ function Clients() {
   });
   const [clients, setClients] = useState<IClient[]>([]);
   const [token] = useLocalStorage("token", "");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [address, setAddress] = useState("");
-  const [cpf, setCpf] = useState("");
+  const [clientForm, setClientForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    address: '',
+    cpf: ''
+  })
+  const [isFormValid, setIsFormValid] = useState(false);
 
   useEffect(() => {
     const request = async () => {
@@ -30,37 +35,29 @@ function Clients() {
     request();
   }, []);
 
-  const handleNameChange = ({
+  useEffect(() => {
+    const { error } = clientSchema.validate(clientForm);
+    if (error) {
+      setIsFormValid(false);
+    } else {
+      setIsFormValid(true);
+    }
+  }, [clientForm]);
+
+  const handleChange = ({
     target,
   }: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = target;
-    setName(value);
-  };
-
-  const handleEmailChange = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = target;
-    setEmail(value);
-  };
-
-  const handlePhoneChange = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = target;
-    setPhone(value);
-  };
-
-  const handleAddressChange = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = target;
-    setAddress(value);
-  };
-
-  const handleCpfChange = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    const { value } = target;
-    setCpf(value);
+    const { value, name } = target;
+    let valueToInsert = '';
+    switch (name) {
+      case 'cpf': valueToInsert = cpfMask(value); break;
+      case 'phone': valueToInsert = phoneMask(value); break;
+      default: valueToInsert = value; break;
+    }
+    setClientForm((oldForm) => ({
+      ...oldForm,
+      [name]: valueToInsert,
+    }))
   };
 
   const handleSubmitClick = async () => {
@@ -71,7 +68,7 @@ function Clients() {
     const { status, data } = await requestApi(
       method,
       endpoint,
-      { name, email, phone, address, cpf },
+      { ...clientForm },
       { authorization: token }
     );
     if (status === 201) {
@@ -83,11 +80,7 @@ function Clients() {
           if (client._id === update.idToUpdate) {
             return {
               _id: client._id,
-              name,
-              email,
-              address,
-              phone,
-              cpf,
+              ...clientForm
             };
           }
           return client;
@@ -98,11 +91,13 @@ function Clients() {
         idToUpdate: "",
       });
     }
-    setName("");
-    setEmail("");
-    setAddress("");
-    setPhone("");
-    setCpf("");
+    setClientForm({
+      name: '',
+      email: '',
+      phone: '',
+      address: '',
+      cpf: ''
+    })
   };
 
   const HandleClickDelete = async ({
@@ -132,18 +127,14 @@ function Clients() {
     });
     const clientToUpdate = clients.find((client) => client._id === id);
     if (clientToUpdate) {
-      setName(clientToUpdate.name);
-      setEmail(clientToUpdate.email);
-      setAddress(clientToUpdate.address);
-      setPhone(clientToUpdate.phone);
-      setCpf(clientToUpdate.cpf);
+      setClientForm(clientToUpdate);
     }
   };
 
   return (
     <div>
       <SideBar />
-      <div className="w-screen h-screen flex items-center justify-center bg-cream">
+      <div className="w-screen h-screen flex items-center justify-center bg-gradient-to-tl from-dcream to-cream font-plexSans">
         <div>
           {clients.map((client: IClient) => (
             <div key={client._id}>
@@ -161,40 +152,60 @@ function Clients() {
             </div>
           ))}
         </div>
-        <div>
-          <input
-            placeholder="Nome"
-            type="text"
-            value={name}
-            onChange={handleNameChange}
-          />
-          <input
-            placeholder="CPF"
-            type="text"
-            value={cpf}
-            onChange={handleCpfChange}
-          />
-          <input
-            placeholder="Email"
-            type="text"
-            value={email}
-            onChange={handleEmailChange}
-          />
-          <input
-            placeholder="Celular"
-            type="text"
-            value={phone}
-            onChange={handlePhoneChange}
-          />
-          <input
-            placeholder="Endereço"
-            type="text"
-            value={address}
-            onChange={handleAddressChange}
-          />
-          <button type="button" onClick={handleSubmitClick}>
-            {update.isUpdating ? "Atualizar" : "Cadastrar"}
-          </button>
+        <div className="flex bg-gradient-to-br from-green to-dgreen w-2/6 h-3/5 rounded-3xl items-center justify-center">
+          <div className="w-4/5 flex flex-col items-center justify-center">
+            <h2 className="text-dcream font-bold text-3xl self-start mb-6">
+              {update.isUpdating ? "Atualizar" : "Cadastrar"}
+            </h2>
+            <input
+              className="w-4/5 p-2 border-b-2 border-dcream focus:outline-none mb-6 bg-transparent text-dcream placeholder:text-dcream"
+              placeholder="Nome"
+              type="text"
+              value={clientForm.name}
+              name="name"
+              onChange={handleChange}
+            />
+            <input
+              className="w-4/5 p-2 border-b-2 border-dcream focus:outline-none mb-6 bg-transparent text-dcream placeholder:text-dcream focus:appearance-none hover:appearance-none"
+              placeholder="CPF"
+              type="text"
+              value={clientForm.cpf}
+              name="cpf"
+              onChange={handleChange}
+            />
+            <input
+              className="w-4/5 p-2 border-b-2 border-dcream focus:outline-none mb-6 bg-transparent text-dcream placeholder:text-dcream"
+              placeholder="Email"
+              type="text"
+              value={clientForm.email}
+              name="email"
+              onChange={handleChange}
+            />
+            <input
+              className="w-4/5 p-2 border-b-2 border-dcream focus:outline-none mb-6 bg-transparent text-dcream placeholder:text-dcream"
+              placeholder="Celular"
+              type="text"
+              value={clientForm.phone}
+              name="phone"
+              onChange={handleChange}
+            />
+            <input
+              className="w-4/5 p-2 border-b-2 border-dcream focus:outline-none mb-6 bg-transparent text-dcream placeholder:text-dcream"
+              placeholder="Endereço"
+              type="text"
+              value={clientForm.address}
+              name="address"
+              onChange={handleChange}
+            />
+            <button
+              className="mt-1 bg-golden rounded-[2em] py-3 px-7 font-bold cursor-pointer shadow-xl mb-10 disabled:bg-gray-400 transition duration-300"
+              type="button"
+              onClick={handleSubmitClick}
+              disabled={!isFormValid}
+            >
+              salvar
+            </button>
+          </div>
         </div>
       </div>
     </div>
