@@ -25,7 +25,7 @@ function RandomDog() {
     <div className="bg-gradient-to-tr from-dcream to-cream font-plexSans">
       <SideBar />
       <div className="h-screen w-screen flex flex-col items-center justify-center">
-        <img src={dogImg} alt="dog image" className="rounded-3xl h-3/6 mb-16 shadow-xl"  />
+        <img src={dogImg} alt="dog image" className="rounded-3xl h-2/6 md:h-3/6 mb-16 shadow-xl"  />
         <button
           className="bg-green px-3 py-2 rounded-lg shadow-md text-white text-2xl"
           type="button"
