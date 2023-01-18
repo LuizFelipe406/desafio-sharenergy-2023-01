@@ -100,7 +100,7 @@ function RandomUsers() {
     <div className="bg-gradient-to-tr from-dcream to-cream w-screen h-screen font-plexSans">
       <SideBar />
       <div className="w-screen h-screen flex flex-col items-center justify-center">
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center md:mt-16">
           <div className="mr-16 mb-2">
             <input
               className="mr-1 text-lg accent-golden"
@@ -168,14 +168,13 @@ function RandomUsers() {
               }
             </button>
         </div>
-        <div className="grid grid-cols-2 h-3/5">
+        <div className="grid xl:grid-cols-2 lg:grid-cols-1 h-3/5 sm:overflow-y-scroll lg:pr-5">
           {users
             .slice(0 + parseInt(currentPage) * 6, 6 + parseInt(currentPage) * 6)
             .map((user, index) => (
               <UserCard key={index} user={user} />
             ))}
         </div>
-
         <div>
           <nav className="flex items-center mt-10">
             {pages.map((page, index) => (
