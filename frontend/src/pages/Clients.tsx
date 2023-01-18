@@ -135,8 +135,8 @@ function Clients() {
   return (
     <div>
       <SideBar />
-      <div className="w-screen h-screen flex items-center justify-around bg-gradient-to-tl from-dcream to-cream font-plexSans">
-        <div className="grid grid-col-1 gap-y-4 h-3/5 w-1/5 ml-20 mt-5 overflow-y-scroll snap-mandatory scroll">
+      <div className="w-screen h-screen flex flex-col lg:flex-row items-center justify-center lg:justify-around bg-gradient-to-tl from-dcream to-cream font-plexSans">
+        <div className="grid grid-col-1 gap-y-4 h-3/5 md:h-2/5 w-4/5 lg:w-2/6 lg:ml-28 mt-28 lg:mt-5 overflow-y-auto snap-mandatory scroll">
           {clients.map((client: IClient) => (
             <div key={client._id} className="flex flex h-fit justify-between snap-center">
               <div className="flex flex-col mr-5">
@@ -159,9 +159,9 @@ function Clients() {
           ))}
           { clients.length === 0 && <span className="font-medium text-gray-500 text-xl">Nenhum Cliente Cadastrado</span>}
         </div>
-        <div className="flex bg-gradient-to-br from-green to-dgreen w-2/6 h-3/5 rounded-3xl items-center justify-center">
-          <div className="w-4/5 flex flex-col items-center justify-center">
-            <h2 className="text-dcream font-bold text-3xl self-start mb-6">
+        <div className="flex bg-gradient-to-br from-green to-dgreen w-4/5 md:w-3/6 lg:w-2/6 h-3/5 md:h-3/6 lg:h-3/5 rounded-3xl items-center justify-center md:mb-8">
+          <div className="w-5/6 lg:w-4/5 flex flex-col items-center justify-center">
+            <h2 className="text-dcream font-bold text-3xl self-start mb-6 mt-5">
               {update.isUpdating ? "Atualizar" : "Cadastrar"}
             </h2>
             <input
