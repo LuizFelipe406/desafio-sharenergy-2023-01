@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BsFillGearFill, BsFillXCircleFill } from "react-icons/bs";
 import SideBar from "../components/SideBar";
 import useLocalStorage from "../hooks/useLocalStorage";
 import IClient from "../interfaces/IClient";
@@ -134,23 +135,29 @@ function Clients() {
   return (
     <div>
       <SideBar />
-      <div className="w-screen h-screen flex items-center justify-center bg-gradient-to-tl from-dcream to-cream font-plexSans">
-        <div>
+      <div className="w-screen h-screen flex items-center justify-around bg-gradient-to-tl from-dcream to-cream font-plexSans">
+        <div className="grid grid-col-1 gap-y-4 h-3/5 w-1/5 ml-20 mt-5 overflow-y-scroll snap-mandatory scroll">
           {clients.map((client: IClient) => (
-            <div key={client._id}>
-              <span>{client.name}</span>
-              <span>{client.email}</span>
-              <span>{client.phone}</span>
-              <span>{client.address}</span>
-              <span>{client.cpf}</span>
-              <button id={client._id} type="button" onClick={HandleClickUpdate}>
-                Atualizar
-              </button>
-              <button id={client._id} type="button" onClick={HandleClickDelete}>
-                X
-              </button>
+            <div key={client._id} className="flex flex h-fit justify-between snap-center">
+              <div className="flex flex-col mr-5">
+                <span className="text-dgreen font-bold text-xl">{`${client.name.toUpperCase()} - ${client.cpf}`}</span>
+                <div className="font-medium text-gray-500">
+                  <span className="mr-5">{client.email}</span>
+                  <span>{client.phone}</span>
+                </div>
+                <span className="font-medium text-gray-500">{`Endereço: ${client.address}`}</span>
+              </div>
+              <div className="text-xl flex items-center justify-center w-fit mr-4">
+                <button className="mr-2" id={client._id} type="button" onClick={HandleClickUpdate}>
+                  {<BsFillGearFill />}
+                </button>
+                <button id={client._id} type="button" onClick={HandleClickDelete}>
+                  { <BsFillXCircleFill />}
+                </button>
+              </div>
             </div>
           ))}
+          { clients.length === 0 && <span className="font-medium text-gray-500 text-xl">Nenhum Cliente Cadastrado</span>}
         </div>
         <div className="flex bg-gradient-to-br from-green to-dgreen w-2/6 h-3/5 rounded-3xl items-center justify-center">
           <div className="w-4/5 flex flex-col items-center justify-center">

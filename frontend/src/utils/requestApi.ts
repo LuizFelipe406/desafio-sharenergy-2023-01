@@ -25,6 +25,6 @@ const requestApi = async (
   request
     .request({ method, url: endpoint, data: body, headers })
     .then(({ status, data }) => ({ status, data }))
-    .catch((error) => error.toJSON());
+    .catch((error) => ({ status: error.response.status, data: error.response.data}));
 
 export default requestApi;
