@@ -97,10 +97,10 @@ function RandomUsers() {
   };
 
   return (
-    <div className="bg-gradient-to-tr from-dcream to-cream w-full h-screen font-plexSans">
+    <div className="bg-gradient-to-tr from-dcream to-cream w-full h-screen font-plexSans m-0 p-0">
       <SideBar />
       <div className="w-screen h-screen flex flex-col items-center justify-center">
-        <div className="flex flex-col items-center justify-center md:mt-16">
+        <div className="flex flex-col items-center justify-center mt-16">
           <div className="mr-16 mb-2">
             <input
               className="mr-1 text-lg accent-golden"
@@ -149,7 +149,7 @@ function RandomUsers() {
             <button
               type="button"
               onClick={addFilter}
-              className="bg-golden h-full px-3 rounded-r-lg shadow-md mr-8"
+              className="bg-golden h-full px-3 rounded-r-lg shadow-md"
             >
               {<BsSearch />}
             </button>
@@ -168,7 +168,7 @@ function RandomUsers() {
               }
             </button>
         </div>
-        <div className="grid xl:grid-cols-2 lg:grid-cols-1 h-3/5 sm:overflow-y-scroll lg:pr-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 h-3/5 overflow-y-auto lg:pr-5">
           {users
             .slice(0 + parseInt(currentPage) * 6, 6 + parseInt(currentPage) * 6)
             .map((user, index) => (

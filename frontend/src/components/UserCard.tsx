@@ -16,8 +16,8 @@ function UserCard({ user }: UserCardProps) {
   } = user;
 
   return (
-    <div className="flex md:ml-16 my-4">
-      <img className="rounded-full mr-10 shadow-xl h-20" src={ large } alt="user image" />
+    <div className="flex md:ml-6 lg:ml-16 my-4">
+      <img className="rounded-full mr-10 md:mr-5 shadow-xl h-20 md:h-28 lg:h-fit" src={ large } alt="user image" />
       <div>
         <h3 className="md:my-5 text-green font-bold">{ `${first.toUpperCase()} ${last.toUpperCase()}, ${age}` }</h3>
         <div className="flex flex-col border-t-2 border-gray-300 pt-3 font-medium">
