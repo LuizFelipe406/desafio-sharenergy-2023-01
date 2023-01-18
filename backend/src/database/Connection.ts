@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import 'dotenv/config';
 
-const MONGO_DB_URL = 'mongodb://localhost:27017/Sharenergy';
+const MONGO_DB_URL = 'mongodb://db:27017/Sharenergy';
 
 const connectToDatabase = (
   mongoDatabaseURI = process.env.MONGO_URI

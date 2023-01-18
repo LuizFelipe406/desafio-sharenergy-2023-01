@@ -54,10 +54,10 @@ function Login() {
   };
 
   const login = async () => {
-    const { status, data } = await requestApi('POST', '/login', { username, password });
+    const { status, data } = await requestApi('POST', 'login', { username, password });
     if (status === 200) {
-      localStorage.setItem('token', data);
-      navigate('/clientList');
+      localStorage.setItem('token', JSON.stringify(data.token));
+      navigate('/randomUsers');
     } else {
       setLoginSuccesfull(false);
     }
