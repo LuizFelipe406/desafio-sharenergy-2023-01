@@ -13,8 +13,10 @@ function Login() {
 
   useEffect(() => {
     if (rememberMe) {
-      setUsername(localStorage.getItem('username') || '');
-      setPassword(localStorage.getItem('password') || '');
+      const storedUsername = localStorage.getItem('username') || '';
+      const storedPassword = localStorage.getItem('password') || '';
+      setUsername(storedUsername);
+      setPassword(storedPassword);
       login();
     }
   }, [])
@@ -54,7 +56,9 @@ function Login() {
   };
 
   const login = async () => {
-    const { status, data } = await requestApi('POST', 'login', { username, password });
+    const storedUsername = localStorage.getItem('username') || '';
+    const storedPassword = localStorage.getItem('password') || '';
+    const { status, data } = await requestApi('POST', 'login', rememberMe ? { username: storedUsername, password: storedPassword } : { username, password });
     if (status === 200) {
       localStorage.setItem('token', JSON.stringify(data.token));
       navigate('/randomUsers');
