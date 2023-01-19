@@ -77,7 +77,7 @@ describe('Testa a rota de Customer', function () {
       });
 
       expect(response.status).to.be.equal(400);
-      expect(response.body).to.be.deep.equal({ message: '"phone" length must be at least 8 characters long' });
+      expect(response.body).to.be.deep.equal({ message: '"phone" length must be at least 15 characters long' });
     });
 
     it('Faz uma requisição com cpf inválido', async function() {
@@ -88,13 +88,13 @@ describe('Testa a rota de Customer', function () {
       .send({
         name: 'Customer 1',
         email: 'customer1@email.com',
-        phone: '1234-5678',
+        phone: '(47) 11234-5678',
         address: 'Endereço 1',
         cpf: '999'
       });
 
       expect(response.status).to.be.equal(400);
-      expect(response.body).to.be.deep.equal({ message: '"cpf" length must be at least 11 characters long' });
+      expect(response.body).to.be.deep.equal({ message: '"cpf" length must be at least 14 characters long' });
     });
 
     it('Faz uma requisição com sucesso e espera receber um novo cliente', async function() {
@@ -107,7 +107,7 @@ describe('Testa a rota de Customer', function () {
       .send({
         name: 'Customer 1',
         email: 'customer1@email.com',
-        phone: '1234-5678',
+        phone: '(47) 11234-5678',
         address: 'Endereço 1',
         cpf: '123.456.789-10'
       });
@@ -152,7 +152,7 @@ describe('Testa a rota de Customer', function () {
       });
 
       expect(response.status).to.be.equal(400);
-      expect(response.body).to.be.deep.equal({ message: '"phone" length must be at least 8 characters long' });
+      expect(response.body).to.be.deep.equal({ message: '"phone" length must be at least 15 characters long' });
     });
 
     it('Faz uma requisição com cpf inválido', async function() {
@@ -165,7 +165,7 @@ describe('Testa a rota de Customer', function () {
       });
 
       expect(response.status).to.be.equal(400);
-      expect(response.body).to.be.deep.equal({ message: '"cpf" length must be at least 11 characters long' });
+      expect(response.body).to.be.deep.equal({ message: '"cpf" length must be at least 14 characters long' });
     });
 
     it('Faz uma requisição com id de cliente invalido', async function() {
@@ -177,7 +177,7 @@ describe('Testa a rota de Customer', function () {
       .set('authorization', token)
       .send({
         email: 'customer1@email.com',
-        phone: '1234-5678',
+        phone: '(47) 11234-5678',
         cpf: '123.456.789-10'
       });
 
@@ -194,7 +194,7 @@ describe('Testa a rota de Customer', function () {
       .set('authorization', token)
       .send({
         email: 'customer1@email.com',
-        phone: '1234-5678',
+        phone: '(47) 11234-5678',
         cpf: '123.456.789-10'
       });
 

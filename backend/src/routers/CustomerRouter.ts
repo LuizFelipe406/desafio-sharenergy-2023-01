@@ -2,7 +2,7 @@ import express from "express";
 import CustomerController from "../controllers/CustomerController";
 import AuthMiddleware from "../middlewares/AuthMiddleware";
 
-export default class UserRouter {
+export default class CustomerRouter {
   public router: express.IRouter;
   private customerController: CustomerController;
   private authMiddleware: AuthMiddleware;
